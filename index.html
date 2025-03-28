@@ -3,23 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Köpek Fotoğrafları</title>
+    <title>Şehir Bilgileri</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin: 20px; }
+        input, button { padding: 10px; font-size: 16px; margin: 10px; }
+        .city-info { margin-top: 20px; display: none; }
+    </style>
 </head>
 <body>
-    <h1>Rastgele Bir Köpek Fotoğrafı</h1>
-    <button onclick="getDog()">Yeni Fotoğraf</button>
-    <br><br>
-    <img id="dogImage" width="300" height="300" alt="Köpek fotoğrafı">
-    
-    <script>
-        function getDog() {
-            fetch("https://dog.ceo/api/breeds/image/random")
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById("dogImage").src = data.message;
-            });
-        }
-        getDog(); // Sayfa açıldığında bir resim yükle
-    </script>
+    <h1>Şehir Bilgisi Getir</h1>
+    <input type="text" id="cityInput" placeholder="Şehir adı girin...">
+    <button onclick="getCityInfo()">Bilgi Al</button>
+
+    <div class="city-info" id="cityInfo">
+        <h2 id="cityName"></h2>
+        <p id="cityDescription"></p>
+        <img id="cityImage" src="" alt="Şehir resmi" width="400">
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
