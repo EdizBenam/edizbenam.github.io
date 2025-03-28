@@ -4,21 +4,68 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Köpek Fotoğrafları</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: inline-block;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        img {
+            display: block;
+            margin: 20px auto;
+            border-radius: 10px;
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
 </head>
 <body>
     <h1>Rastgele Bir Köpek Fotoğrafı</h1>
-    <button onclick="getDog()">Yeni Fotoğraf</button>
-    <br><br>
-    <img id="dogImage" width="300" height="300" alt="Köpek fotoğrafı">
-    
+    <div class="container">
+        <button onclick="getDog()">Yeni Fotoğraf</button>
+        <br><br>
+        <img id="dogImage" width="300" height="300" alt="Köpek fotoğrafı">
+    </div>
+
     <script>
         function getDog() {
             fetch("https://dog.ceo/api/breeds/image/random")
             .then(response => response.json())
             .then(data => {
                 document.getElementById("dogImage").src = data.message;
-            });
+            })
+            .catch(error => console.error("Hata oluştu:", error));
         }
+
         getDog();
     </script>
 </body>
