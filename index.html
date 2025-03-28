@@ -3,42 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Şehir Bilgileri</title>
+    <title>Köpek Fotoğrafları</title>
 </head>
 <body>
-    <h1>Şehir Bilgileri</h1>
-    <input type="text" id="cityInput" placeholder="Şehir adı girin">
-    <button onclick="getCityInfo()">Bilgileri Getir</button>
+    <h1>Rastgele Bir Köpek Fotoğrafı</h1>
+    <button onclick="getDog()">Yeni Fotoğraf</button>
+    <br><br>
+    <img id="dogImage" width="300" height="300" alt="Köpek fotoğrafı">
     
-    <div id="cityInfo"></div>
-
     <script>
-        function getCityInfo() {
-            const city = document.getElementById("cityInput").value;
-            if (!city) {
-                alert("Lütfen bir şehir adı girin!");
-                return;
-            }
-            
-            fetch(`https://api.roadgoat.com/api/v2/destinations/auto_complete?q=${city}`)
+        function getDog() {
+            fetch("https://dog.ceo/api/breeds/image/random")
             .then(response => response.json())
             .then(data => {
-                if (data.data.length > 0) {
-                    const cityData = data.data[0];
-                    document.getElementById("cityInfo").innerHTML = `
-                        <h2>${cityData.attributes.name}</h2>
-                        <p><strong>Kategori:</strong> ${cityData.attributes.destination_type}</p>
-                        <p><strong>Ülke:</strong> ${cityData.attributes.country}</p>
-                    `;
-                } else {
-                    document.getElementById("cityInfo").innerHTML = "<p>Şehir bulunamadı.</p>";
-                }
-            })
-            .catch(error => {
-                console.error("Hata:", error);
-                document.getElementById("cityInfo").innerHTML = "<p>Bir hata oluştu.</p>";
+                document.getElementById("dogImage").src = data.message;
             });
         }
+        getDog(); // Sayfa açıldığında bir resim yükle
     </script>
 </body>
 </html>
