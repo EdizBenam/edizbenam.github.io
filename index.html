@@ -23,4 +23,35 @@
 
     <script src="script.js"></script>
 </body>
+
+<script>async function getCityInfo() {
+    let city = document.getElementById("cityInput").value;
+    if (!city) {
+        alert("Lütfen bir şehir adı girin!");
+        return;
+    }
+
+    let url = `https://api.roadgoat.com/api/v2/destinations/auto_complete?q=${city}`;
+
+    try {
+        let response = await fetch(url);
+        let data = await response.json();
+
+        if (data.data.length === 0) {
+            alert("Şehir bulunamadı.");
+            return;
+        }
+
+        let cityData = data.data[0];
+
+        document.getElementById("cityName").innerText = cityData.attributes.name;
+        document.getElementById("cityDescription").innerText = cityData.attributes.long_description || "Açıklama bulunamadı.";
+        document.getElementById("cityImage").src = cityData.attributes.image_url || "https://via.placeholder.com/400";
+
+        document.getElementById("cityInfo").style.display = "block";
+    } catch (error) {
+        alert("Veri çekme hatası: " + error);
+    }
+}
+</script>
 </html>
