@@ -222,7 +222,6 @@ function LoveHeart() {
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
       texts = createHeart(ctx, width, height);
-      startedAt = performance.now();
     };
 
     const render = (now: number) => {
